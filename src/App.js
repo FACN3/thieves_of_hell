@@ -16,11 +16,13 @@ class App extends Component {
     this.deleteTodo = this.deleteTodo.bind(this);
   }
 
-  addTodo(text) {
+  addTodo(text, priority) {
     const addtime = Date.now();
-    const newTodo = { text, addtime };
-    console.log(newTodo);
-    const newState = this.state.items.concat([newTodo]);
+    const newTodo = { text, priority, addtime };
+    let newState = this.state.items.concat([newTodo]);
+    newState = newState.sort((a, b) => {
+      return a.priority - b.priority;
+    });
     this.setState({ items: newState });
   }
 
